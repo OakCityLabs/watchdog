@@ -45,12 +45,13 @@ class ObservedWatch:
         ``True`` if watch is recursive; ``False`` otherwise.
     """
 
-    def __init__(self, path, recursive):
+    def __init__(self, path, recursive, ignore_dirs=[]):
         if isinstance(path, Path):
             self._path = str(path)
         else:
             self._path = path
         self._is_recursive = recursive
+        self._ignore_dirs = ignore_dirs
 
     @property
     def path(self):
@@ -63,8 +64,13 @@ class ObservedWatch:
         return self._is_recursive
 
     @property
+    def ignore_dirs(self):
+        """Subdirectories to ignore"""
+        return self._is_recursive
+
+    @property
     def key(self):
-        return self.path, self.is_recursive
+        return self.path, self.is_recursive, self.ignore_dirs
 
     def __eq__(self, watch):
         return self.key == watch.key
@@ -76,8 +82,8 @@ class ObservedWatch:
         return hash(self.key)
 
     def __repr__(self):
-        return "<%s: path=%s, is_recursive=%s>" % (
-            type(self).__name__, self.path, self.is_recursive)
+        return "<%s: path=%s, is_recursive=%s, ignore_dirs=%s>" % (
+            type(self).__name__, self.path, self.is_recursive, self.ignore_dirs)
 
 
 # Observer classes
@@ -265,7 +271,7 @@ class BaseObserver(EventDispatcher):
                 raise
         super().start()
 
-    def schedule(self, event_handler, path, recursive=False):
+    def schedule(self, event_handler, path, recursive=False, ignore_dirs=[]):
         """
         Schedules watching a path and calls appropriate methods specified
         in the given event handler in response to file system events.
@@ -290,7 +296,7 @@ class BaseObserver(EventDispatcher):
             a watch.
         """
         with self._lock:
-            watch = ObservedWatch(path, recursive)
+            watch = ObservedWatch(path, recursive, ignore_dirs=ignore_dirs)
             self._add_handler_for_watch(event_handler, watch)
 
             # If we don't have an emitter for this watch already, create it.

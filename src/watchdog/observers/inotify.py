@@ -115,7 +115,7 @@ class InotifyEmitter(EventEmitter):
 
     def on_thread_start(self):
         path = os.fsencode(self.watch.path)
-        self._inotify = InotifyBuffer(path, self.watch.is_recursive)
+        self._inotify = InotifyBuffer(path, self.watch.is_recursive, self.watch.exclude_dirs)
 
     def on_thread_stop(self):
         if self._inotify:

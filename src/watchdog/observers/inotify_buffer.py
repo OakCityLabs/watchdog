@@ -29,10 +29,10 @@ class InotifyBuffer(BaseThread):
 
     delay = 0.5
 
-    def __init__(self, path, recursive=False):
+    def __init__(self, path, recursive=False, exclude_dirs=[]):
         super().__init__()
         self._queue = DelayedQueue(self.delay)
-        self._inotify = Inotify(path, recursive)
+        self._inotify = Inotify(path, recursive, exclude_dirs)
         self.start()
 
     def read_event(self):
