@@ -70,7 +70,7 @@ class ObservedWatch:
 
     @property
     def key(self):
-        return self.path, self.is_recursive, self.exclude_dirs
+        return self.path, self.is_recursive, str(self.exclude_dirs)
 
     def __eq__(self, watch):
         return self.key == watch.key
