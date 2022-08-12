@@ -265,7 +265,7 @@ class Inotify:
         def _recursive_simulate(src_path):
             events = []
             for root, dirnames, filenames in os.walk(src_path, topdown=True):
-                dirnames[:] = [d for d in dirnames if d not in self._exclude_dirs]
+                dirnames[:] = [d for d in dirnames if d not in self._exclude_dirs and os.path.join(root, d) not in self._exclude_dirs]
                 for dirname in dirnames:
                     try:
                         full_path = os.path.join(root, dirname)
@@ -369,7 +369,7 @@ class Inotify:
         self._add_watch(path, mask)
         if recursive:
             for root, dirnames, _ in os.walk(path, topdown=True):
-                dirnames[:] = [d for d in dirnames if d not in self._exclude_dirs]
+                dirnames[:] = [d for d in dirnames if d not in self._exclude_dirs and os.path.join(root, d) not in self._exclude_dirs]
                 for dirname in dirnames:
                     full_path = os.path.join(root, dirname)
                     if os.path.islink(full_path):
