@@ -4,6 +4,10 @@ Watchdog
 |Build Status|
 |CirrusCI Status|
 
+**This is a fork of https://github.com/gorakhargosh/watchdog with some specific tweaks for 
+[Callisto Jupyter D1 Servers](https://pypi.org/project/callisto-jupyter-d1/), you should 
+install [watchdog](https://pypi.org/project/watchdog/) instead if you're looking for a stable API**
+
 Python API and shell utilities to monitor file system events.
 
 Works on 3.6+.
@@ -11,6 +15,16 @@ Works on 3.6+.
 If you want to use Python 2.6, you should stick with watchdog < 0.10.0.
 
 If you want to use Python 2.7, 3.4 or 3.5, you should stick with watchdog < 1.0.0.
+
+
+Callisto Watchdog Differences
+-----------------------------
+* `BaseObserver.schedule` takes an `exclude_dirs` parameter that is a list of directories
+   that watchdog will not descend into and observe, at the moment it **only works on Linux**.
+   Any directory with one of those names in the directory tree will be ignored. Implementation is based on
+   <https://github.com/gorakhargosh/watchdog/issues/212#issuecomment-1078267199>
+*  This package gets published as callisto_watchdog to pypi
+
 
 Example API Usage
 -----------------

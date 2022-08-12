@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Modified by Oak City Labs
+
 import importlib.util
 import sys
 import os
@@ -87,13 +89,13 @@ with open('README.rst', encoding='utf-8') as f:
 with open('changelog.rst', encoding='utf-8') as f:
     changelog = f.read()
 
-setup(name="watchdog",
+setup(name="callisto_watchdog",
       version=version.VERSION_STRING,
       description="Filesystem events monitoring",
       long_description=readme + '\n\n' + changelog,
       long_description_content_type="text/x-rst",
-      author="Yesudeep Mangalapilly",
-      author_email="yesudeep@gmail.com",
+      author="OakCityLabs",
+      author_email="support@callistoapp.com",
       license="Apache License 2.0",
       url="https://github.com/gorakhargosh/watchdog",
       keywords=' '.join([

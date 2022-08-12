@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Modified by Oak City Labs
+
 """
 :module: watchdog.observers.inotify
 :synopsis: ``inotify(7)`` based emitter implementation.

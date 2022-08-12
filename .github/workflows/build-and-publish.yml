@@ -13,12 +13,14 @@
 # platform and override the platform name manually via wheel's --plat-name
 # feature, to provide a platform-specific wheel for all platforms.
 
+# Modified by Oak City Labs
+
 name: Build & Publish
 
 on:
   push:
     branches:
-    - master
+    - callisto_master
   pull_request:
     paths:
       - ".github/workflows/build-and-publish.yml"
@@ -29,7 +31,7 @@ on:
       branch:
         description: 'The branch, tag or SHA to release from'
         required: true
-        default: 'master'
+        default: 'callisto_master'
 
 jobs:
   macos-built-distributions:
